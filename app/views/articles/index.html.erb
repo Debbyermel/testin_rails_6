@@ -1,5 +1,5 @@
 <h1>Show list page</h1>
-<table>
+<table class= 'table'>
   <thead>
     <tr>
     <th> Title</th>
@@ -20,6 +20,5 @@
   </tbody>
 </table>
 
-<h3>
-  <%= link_to 'Create new article', new_article_path %>
-</h3>
+<br>
+<%= link_to 'Create new article', new_article_path, class: ' btn btn-info' %>
