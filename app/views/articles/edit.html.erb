@@ -1,15 +1,2 @@
-<h1>Edit article</h1>
-<% if @article.errors.any? %>
-  <h2> The following errors prevented the article to be saved.</h2>
-  <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-      <li>
-        <%= msg %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+<h1 class="text-center mt-4">Edit article</h1>
 <%= render 'form' %>
-<p>
-  <%= link_to 'Return', articles_path %>
-</p>
