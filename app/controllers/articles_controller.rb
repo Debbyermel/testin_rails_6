@@ -1,5 +1,8 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :required_user, except: [:show, :index]
+  before_action :required_same_user, only: [:edit, :update, :destroy]
+
   def show
   end
 
@@ -17,7 +20,7 @@ class ArticlesController < ApplicationController
   def create
     # render plain: @article.inspect
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     if @article.save
       flash[:notice] = 'Article was created successfully.'
       redirect_to article_path(@article)
@@ -48,6 +51,13 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def required_same_user
+    if current_user != @article.user
+      flash[:alert] = 'This article dont belong to you.'
+      redirect_to @article
+    end
   end
 
 end
